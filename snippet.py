@@ -1,10 +1,17 @@
+import os
 from flask import Flask, request, render_template, jsonify
 from flask.ext.assets import Environment, Bundle
+from werkzeug import secure_filename
+
+# TODO: refactor this goddamn thing
 
 UPLOAD_FOLDER = 'tmp/'
+ALLOWED_EXTENSIONS = set(['mp3', 'wav'])
 
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 assets = Environment(app)
 js = Bundle('vendor/js/jquery-1.7.2.min.js',
 	'vendor/js/jquery-ui-1.8.21.custom.min.js',
@@ -29,13 +36,19 @@ def index():
 
 	if request.method == 'POST':
 		print 'POST'
-		print request.files
-		return jsonify(
-			name='test.png',
-			size='10kb',
-			url='none',
-			)
+		input_file = request.files.getlist('files[]')[0]
+		if input_file and allowed_file(input_file.filename):
+			filename = secure_filename(input_file.filename)
+			input_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+			return jsonify(
+				name=filename,
+				size='10kb',
+				url='none',
+				)
 
+def allowed_file(filename):
+	return '.' in filename and \
+		filename.split('.')[-1] in ALLOWED_EXTENSIONS
 
 if __name__ == "__main__":
 	app.run()
