@@ -1,0 +1,22 @@
+var Square,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+Square = (function() {
+
+  function Square() {
+    this.analyize = __bind(this.analyize, this);
+    this.play = __bind(this.play, this);
+  }
+
+  Square.prototype.initialize = function(file) {
+    this.file = file;
+    return this.name = "";
+  };
+
+  Square.prototype.play = function() {};
+
+  Square.prototype.analyize = function() {};
+
+  return Square;
+
+})();

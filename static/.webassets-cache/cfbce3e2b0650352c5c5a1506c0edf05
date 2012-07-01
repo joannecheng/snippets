@@ -1,0 +1,45 @@
+var DragDrop,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+DragDrop = (function() {
+
+  function DragDrop() {
+    this.dragleaveListener = __bind(this.dragleaveListener, this);
+    this.dragenterListener = __bind(this.dragenterListener, this);
+    this.dropHandlers = __bind(this.dropHandlers, this);    this.dropHandlers();
+  }
+
+  DragDrop.prototype.dropHandlers = function() {
+    var _this = this;
+    $(document).bind('drop dragover', function(e) {
+      return e.preventDefault();
+    });
+    $('#drop_area').on('dragenter', this.dragenterListener);
+    $('#drop_area').on('dragleave', this.dragleaveListener);
+    return $('#fileupload').fileupload({
+      dataType: 'png',
+      drop: function(e, data) {
+        var file, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = data.length; _i < _len; _i++) {
+          file = data[_i];
+          _results.push($('body').append($('<p/>').text(file.name)));
+        }
+        return _results;
+      }
+    });
+  };
+
+  DragDrop.prototype.dragenterListener = function(e) {
+    return $('#drop_area').css('opacity', '0.8');
+  };
+
+  DragDrop.prototype.dragleaveListener = function(e) {
+    return $('#drop_area').css('opacity', '1');
+  };
+
+  return DragDrop;
+
+})();
+
+window.DragDrop = new DragDrop;

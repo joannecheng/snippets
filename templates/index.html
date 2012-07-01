@@ -1,0 +1,24 @@
+<html>
+  <head>
+    {% assets "js_all" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+
+    {% assets "css_all" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    {% endassets %}
+    
+    <title>Snippets</title>
+  </head>
+
+  <body>
+    <form id='fileupload'> </form>
+    <div id="drop_area">
+      Drop MP3/Wav Here
+    </div>
+
+    {% assets "coffee_all" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+  </body>
+</html>

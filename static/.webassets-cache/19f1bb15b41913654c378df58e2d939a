@@ -1,0 +1,35 @@
+var DragDrop,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+DragDrop = (function() {
+
+  function DragDrop() {
+    this.dropListner = __bind(this.dropListner, this);
+    this.dropHandlers = __bind(this.dropHandlers, this);
+  }
+
+  DragDrop.prototype.initialize = function() {
+    return this.dropHandlers();
+  };
+
+  DragDrop.prototype.dropHandlers = function() {
+    var _this = this;
+    $(document).bind('drop dragover', function(e) {
+      return e.preventDefault();
+    });
+    return this.drop = $('#drop_area').fileupload(this.dropListener);
+  };
+
+  DragDrop.prototype.dropListner = function(event, data) {
+    var _this = this;
+    alert('drop');
+    return $.each(data.files, function(index, file) {
+      return console.log("Dropped File: ", file.name);
+    });
+  };
+
+  return DragDrop;
+
+})();
+
+window.DragDrop = new DragDrop;

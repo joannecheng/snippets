@@ -1,0 +1,19 @@
+Snippets
+
+To use:
+  Drag an .mp3 or .wav file into the browser window.
+  Wait for the server to break up your file into a bunch of 1 beat segments.
+
+  [[spinning icon]]
+
+  Click on a square to play it.
+
+  To create a sample, drag a square next to another one. They will snap together.
+
+  To play, click the play icon on each square or collection of squares. Or, put your mouse over a square and
+  
+  Drag some clips down to the "play" area to create loops.
+
+
+TODO:
+  jQueryUI (draggable)
