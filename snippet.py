@@ -1,4 +1,4 @@
-import os
+import os, shutil
 from flask import Flask, request, render_template, jsonify
 from flask.ext.assets import Environment, Bundle
 from werkzeug import secure_filename
@@ -35,14 +35,13 @@ def index():
 		return render_template('index.html')
 
 	if request.method == 'POST':
-		print 'POST'
 		input_file = request.files.getlist('files[]')[0]
 		if input_file and allowed_file(input_file.filename):
 			filename = secure_filename(input_file.filename)
 			input_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 			return jsonify(
 				name=filename,
-				size='10kb',
+				size=input_file.content_length,
 				url='none',
 				)
 
