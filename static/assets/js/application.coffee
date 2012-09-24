@@ -5,8 +5,8 @@ class DragDrop
   dropHandlers: =>
     $(document).bind 'drop dragover', (e) -> 
       e.preventDefault()
-    $('#drop_area').on('dragenter', @dragenterListener)
-    $('#drop_area').on('dragleave', @dragleaveListener)
+    $('body').on('dragenter', @dragenterListener)
+    $('body').on('dragleave', @dragleaveListener)
 
     $('#fileupload').fileupload(
       dataType: 'mp3,wav',
@@ -17,10 +17,11 @@ class DragDrop
     )
 
   dragenterListener: (e) =>
-    $('#drop_area').css('opacity', '0.8')
+    $('body').css('background-color', 'red')
 
   dragleaveListener: (e) =>
-    $('#drop_area').css('opacity', '1')
+    $('body').css('background-color', 'white')
 
 
 window.DragDrop = new DragDrop
+window.context = new webkitAudioContext()

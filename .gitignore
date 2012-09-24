@@ -1,3 +1,4 @@
 tmp/*
 static/gen/*
 static/.webassets-cache/*
+*.pyc

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     {% assets "js_all" %}
@@ -12,13 +13,19 @@
   </head>
 
   <body>
-    <form id='fileupload'> </form>
-    <div id="drop_area">
-      Drop MP3/Wav Here
+    <div id="top_content">
+      Drop an mp3 anywhere on the page
     </div>
+    <form id='fileupload'> </form>
+
+    <div id='beat_container'>
+    <script type="text/template" id="beat_template">
+    </script>
+  </div>
 
     {% assets "coffee_all" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
+
   </body>
 </html>
